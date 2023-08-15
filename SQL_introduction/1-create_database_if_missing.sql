@@ -1,7 +1,6 @@
 -- Attempt to create the database (will fail if it already exists)
 CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
 
-
 -- Check if the database was created successfully
 -- The error code for "database already exists" is 1007
 -- We ignore this error using the IF statement
