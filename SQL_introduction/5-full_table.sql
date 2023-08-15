@@ -19,6 +19,8 @@ SET @create_statement = (
     GROUP BY table_name
 );
 
+-- Set the formatted CREATE TABLE statement
+SET @formatted_create_statement = REPLACE(@create_statement, ",`", "`");
+
 -- Print the formatted CREATE TABLE statement
-SET SESSION group_concat_max_len = 1000000;
-SELECT REPLACE(@create_statement, ",`", "`") AS formatted_create_statement;
+SELECT @formatted_create_statement;
