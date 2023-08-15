@@ -1,12 +1,15 @@
--- Attempt to create the database (will fail if it already exists)
-CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
+-- Create a stored procedure that attempts to create the database
+DELIMITER //
+CREATE PROCEDURE CreateDatabaseIfNotExists()
+BEGIN
+    DECLARE CONTINUE HANDLER FOR 1007 BEGIN END;
+    CREATE DATABASE hbtn_0c_0;
+END;
+//
+DELIMITER ;
 
--- Create a temporary table to store the result of the attempt
-CREATE TEMPORARY TABLE IF NOT EXISTS create_db_result (message VARCHAR(100));
+-- Call the stored procedure
+CALL CreateDatabaseIfNotExists();
 
--- Insert a message based on the attempt result
-INSERT INTO create_db_result (message) VALUES
-    (IFNULL(NULLIF(LAST_INSERT_ID(CONNECTION_ID()), 0), 'Database already exists: hbtn_0c_0'));
-
--- Display the result
-SELECT message FROM create_db_result;
+-- Drop the stored procedure
+DROP PROCEDURE IF EXISTS CreateDatabaseIfNotExists;
