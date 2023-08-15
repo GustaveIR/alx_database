@@ -5,10 +5,10 @@ SET @create_statement = (
         'CREATE TABLE `', table_name, '` (\n',
         GROUP_CONCAT(
             '  `', column_name, '` ', column_type,
-            IF(column_default IS NOT NULL, CONCAT('DEFAULT ', column_default), ''),
-            IF(is_nullable = 'NO', 'NOT NULL', ''),
-            IF(column_key = 'PRI', 'PRIMARY KEY', ''),
-            IF(extra = 'auto_increment', 'AUTO_INCREMENT', '')
+            IF(is_nullable = 'NO', 'NOT NULL', 'DEFAULT NULL'),
+            IF(column_key = 'PRI', 'AUTO_INCREMENT', ''),
+            IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT('DEFAULT ', column_default), ''),
+            IF(column_key = 'PRI', '', IF(is_nullable = 'NO', 'PRIMARY KEY', '')),
             SEPARATOR ',\n'
         ),
         '\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
