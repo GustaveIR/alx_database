@@ -4,9 +4,9 @@ SET @create_statement = (
         table_name, '\n',
         'CREATETABLE`', table_name, '`(\n',
         GROUP_CONCAT(
-            '  `', column_name, '`', column_type,
+            '  `', column_name, '` ', column_type,
             IF(is_nullable = 'NO', 'NOTNULL', 'DEFAULTNULL'),
-            IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT('DEFAULT', IF(column_default = '', 'NULL', column_default)), ''),
+            IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT('DEFAULT ', IF(column_default = '', 'NULL', column_default)), ''),
             IF(column_key = 'PRI', 'AUTO_INCREMENT', ''),
             ',\n'
         ),
@@ -19,4 +19,4 @@ SET @create_statement = (
 );
 
 -- Print the formatted CREATE TABLE statement
-SELECT REPLACE(@create_statement, "CO'atline", "COLLATE") AS formatted_create_statement;
+SELECT REPLACE(REPLACE(@create_statement, ",`", "`"), ",\n)", "\n);") AS formatted_create_statement;
