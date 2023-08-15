@@ -2,7 +2,7 @@
 SET @create_statement = (
     SELECT CONCAT(
         'first_table\n',
-        'CREATETABLE `first_table` (\n',
+        'CREATETABLE`first_table`(\n',
         GROUP_CONCAT(
             '  `', column_name, '` ', column_type,
             IF(is_nullable = 'NO', 'NOT NULL', 'DEFAULT NULL'),
@@ -20,4 +20,5 @@ SET @create_statement = (
 );
 
 -- Print the formatted CREATE TABLE statement
+SET SESSION group_concat_max_len = 1000000;
 SELECT REPLACE(@create_statement, ",`", "`") AS formatted_create_statement;
