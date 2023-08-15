@@ -1,14 +1,11 @@
--- Store the CREATE TABLE statement in a variable
-SET @create_statement = (
+-- Create a temporary table to store the CREATE TABLE statement
+CREATE TEMPORARY TABLE IF NOT EXISTS tmp_create_table AS
     SELECT create_statement
     FROM information_schema.tables
-    WHERE table_schema = 'hbtn_0c_0'
-      AND table_name = 'first_table'
-);
+    WHERE table_schema = 'hbtn_test_db_5'
+      AND table_name = 'first_table';
 
--- Retrieve column definitions and format the output
-SELECT 
-    CONCAT(table_name, 'CREATE TABLE', create_statement) AS formatted_create_statement
-FROM information_schema.tables
-WHERE table_schema = 'hbtn_0c_0'
-  AND table_name = 'first_table';
+-- Retrieve and format the CREATE TABLE statement
+SELECT
+    SUBSTRING_INDEX(SUBSTRING_INDEX(create_statement, '(', 2), ')', -1) AS formatted_create_statement
+FROM tmp_create_table;
