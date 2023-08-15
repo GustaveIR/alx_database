@@ -5,16 +5,16 @@ SET @create_statement = (
         'CREATETABLE `first_table` (\n',
         GROUP_CONCAT(
             '  `', column_name, '` ', column_type,
-            IF(is_nullable = 'NO', 'NOT NULL', 'DEFAULT NULL'),
-            IF(column_key = 'PRI', ' AUTO_INCREMENT', ''),
+            IF(is_nullable = 'NO', 'NOTNULL', 'DEFAULTNULL'),
             IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT(' DEFAULT ', IF(column_default = '', 'NULL', column_default)), ''),
-            IF(column_key = 'PRI', '', IF(is_nullable = 'NO', ', PRIMARY KEY (`id`)', '')),
+            IF(column_key = 'PRI', ' AUTO_INCREMENT', ''),
             ','
         ),
-        '\n);\nENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
+        '\nPRIMARY KEY (`id`)\n',
+        ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
     )
     FROM information_schema.columns
-    WHERE table_schema = 'hbtn_0c_0'
+    WHERE table_schema = 'hbtn_test_db_5'
       AND table_name = 'first_table'
 );
 
