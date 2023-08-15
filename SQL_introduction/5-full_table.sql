@@ -7,7 +7,7 @@ SET @create_statement = (
             '  `', column_name, '` ', column_type,
             IF(is_nullable = 'NO', 'NOT NULL', 'DEFAULT NULL'),
             IF(column_key = 'PRI', 'AUTO_INCREMENT', ''),
-            IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT('DEFAULT ', column_default), ''),
+            IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT('DEFAULT ', IF(column_default = '', 'NULL', column_default)), ''),
             IF(column_key = 'PRI', '', IF(is_nullable = 'NO', 'PRIMARY KEY', '')),
             SEPARATOR ',\n'
         ),
@@ -19,4 +19,4 @@ SET @create_statement = (
 );
 
 -- Print the formatted CREATE TABLE statement
-SELECT @create_statement AS formatted_create_statement;
+SELECT REPLACE(@create_statement, "CO'atline", "COLLATE") AS formatted_create_statement;
