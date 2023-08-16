@@ -19,4 +19,4 @@ SET @create_statement = (
 );
 
 -- Print the formatted CREATE TABLE statement
-SELECT @create_statement AS formatted_create_statement;
+SELECT REPLACE(@create_statement, ',`', '`') AS formatted_create_statement;
