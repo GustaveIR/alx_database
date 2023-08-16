@@ -1,7 +1,11 @@
+-- Set the database and table names
+SET @db_name = 'hbtn_test_db_5';
+SET @table_name = 'first_table';
+
 -- Store the CREATE TABLE statement in a variable
 SET @create_statement = (
     SELECT CONCAT(
-        'first_table CREATE TABLE `first_table` (',
+        @table_name, ' CREATE TABLE `', @table_name, '` (',
         GROUP_CONCAT(
             '`', column_name, '` ', column_type,
             IF(is_nullable = 'NO', ' NOT NULL', ' DEFAULT NULL'),
@@ -13,8 +17,8 @@ SET @create_statement = (
         ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
     )
     FROM information_schema.columns
-    WHERE table_schema = 'hbtn_test_db_5'
-      AND table_name = 'first_table'
+    WHERE table_schema = @db_name
+      AND table_name = @table_name
     GROUP BY table_name
 );
 
