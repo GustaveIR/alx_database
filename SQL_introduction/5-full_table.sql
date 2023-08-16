@@ -1,3 +1,19 @@
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
+
+-- Switch to the newly created database
+USE hbtn_0c_0;
+
+-- Create the table 'first_table'
+CREATE TABLE IF NOT EXISTS first_table (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(128) DEFAULT NULL,
+    `c` CHAR(1) DEFAULT NULL,
+    `created_at` DATE DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Display the CREATE TABLE statement for 'first_table'
 -- Store the CREATE TABLE statement in a variable
 SET @create_statement = (
     SELECT CONCAT(
