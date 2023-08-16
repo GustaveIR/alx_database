@@ -1,3 +1,15 @@
+-- Create database and table
+DROP DATABASE IF EXISTS hbtn_test_db_5;
+CREATE DATABASE IF NOT EXISTS hbtn_test_db_5;
+USE hbtn_test_db_5;
+CREATE TABLE IF NOT EXISTS first_table (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(128),
+    c CHAR(1),
+    created_at DATE,
+    PRIMARY KEY (id)
+);
+
 -- Store the CREATE TABLE statement in a variable
 SET @create_statement = (
     SELECT CONCAT(
@@ -13,7 +25,7 @@ SET @create_statement = (
         ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
     )
     FROM information_schema.columns
-    WHERE table_schema = 'hbtn_0c_0'
+    WHERE table_schema = 'hbtn_test_db_5'
       AND table_name = 'first_table'
     GROUP BY table_name
 );
