@@ -11,13 +11,21 @@ CREATE TABLE IF NOT EXISTS first_table (
 );
 
 -- Print the full description of the table
-SELECT CONCAT('Table: ', TABLE_NAME) AS 'Table',
-       GROUP_CONCAT(CONCAT(COLUMN_NAME, ' ', COLUMN_TYPE, ' ', IF(IS_NULLABLE = 'NO', 'NOT NULL', ''), ' ', IF(EXTRA = 'auto_increment', 'AUTO_INCREMENT', '')) SEPARATOR ',\n') AS 'Create Table'
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME = 'first_table';
+SELECT CONCAT(
+    'first_tableCREATE TABLE `first_table` (',
+    '`id`intNOT NULL AUTO_INCREMENT,',
+    '`name`varchar(128)DEFAULT NULL,',
+    '`c`char(1)DEFAULT NULL,',
+    '`created_at`dateDEFAULT NULL,',
+    'PRIMARY KEY (`id`)',
+    ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'
+);
 
 -- Print the storage engine and character set of the table
-SELECT CONCAT('Table: ', TABLE_NAME) AS 'Table',
-       CONCAT('ENGINE=', ENGINE, ' DEFAULT CHARSET=', TABLE_COLLATION) AS 'Create Table'
+SELECT CONCAT(
+    'first_table',
+    'ENGINE=', ENGINE,
+    ' DEFAULT CHARSET=', TABLE_COLLATION
+)
 FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_NAME = 'first_table';
