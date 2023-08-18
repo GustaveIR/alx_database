@@ -1,11 +1,10 @@
--- Set the database and table names
 SET @db_name = 'hbtn_0c_0';
 SET @table_name = 'first_table';
 
 -- Get the column information
 SET @column_info = (
     SELECT GROUP_CONCAT(
-        '`', column_name, '`', column_type,
+        '`', column_name, '` ', column_type,
         IF(is_nullable = 'NO', ' NOT NULL', ' DEFAULT NULL'),
         IF(column_default IS NOT NULL AND column_key <> 'PRI', CONCAT(' DEFAULT ', IF(column_default = '', 'NULL', column_default)), ''),
         IF(column_key = 'PRI', ' AUTO_INCREMENT', '')
