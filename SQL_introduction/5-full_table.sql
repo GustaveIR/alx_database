@@ -2,8 +2,6 @@
 DROP DATABASE IF EXISTS hbtn_test_db_5;
 CREATE DATABASE IF NOT EXISTS hbtn_test_db_5;
 USE hbtn_test_db_5;
-
--- Create table if it doesn't exist
 CREATE TABLE IF NOT EXISTS first_table (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(128),
