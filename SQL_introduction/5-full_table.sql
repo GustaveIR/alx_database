@@ -1,26 +1,16 @@
-SET @db_name = 'hbtn_0c_0';
-SET @table_name = 'first_table';
+-- Create database and table
 
--- Get the column information
-SET @column_info = (
-    SELECT GROUP_CONCAT(
-        '`', column_name, '` ', column_type,
-        IF(is_nullable = 'NO', ' NOT NULL', ' DEFAULT NULL'),
-        IF(column_default IS NOT NULL AND column_key <> 'PRI' AND column_type <> 'char(1)', CONCAT(' DEFAULT ', IF(column_default = '', 'NULL', column_default)), ''),
-        IF(column_key = 'PRI', ' AUTO_INCREMENT', '')
-    )
-    FROM information_schema.columns
-    WHERE table_schema = @db_name
-      AND table_name = @table_name
+-- Check if the database `hbtn_test_db_5` exists
+CREATE DATABASE IF NOT EXISTS hbtn_test_db_5;
+
+-- Use the database `hbtn_test_db_5`
+USE hbtn_test_db_5;
+
+-- Create the table `first_table`
+CREATE TABLE first_table (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(128) NOT NULL,
+  c CHAR(1) NOT NULL,
+  created_at DATE NOT NULL,
+  PRIMARY KEY (id)
 );
-
--- Construct the CREATE TABLE statement
-SET @create_statement = CONCAT(
-    @table_name, ' CREATE TABLE `', @table_name, '` (',
-    @column_info,
-    ', PRIMARY KEY (`id`)',
-    ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
-);
-
--- Print the formatted CREATE TABLE statement
-SELECT @create_statement;
