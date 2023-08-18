@@ -17,10 +17,10 @@ SET @column_info = (
 
 -- Construct the CREATE TABLE statement
 SET @create_statement = CONCAT(
-    @table_name, 'CREATETABLE`', @table_name, '`(',
+    'CREATE TABLE `', @table_name, '` (',
     @column_info,
-    'PRIMARYKEY(`id`)',
-    ')ENGINE=InnoDBDEFAULTCHARSET=utf8mb4COLLATE=utf8mb4_0900_ai_ci;'
+    ', PRIMARY KEY (`id`)',
+    ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;'
 );
 
 -- Print the formatted CREATE TABLE statement
