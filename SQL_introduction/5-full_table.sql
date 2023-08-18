@@ -2,10 +2,8 @@
 
 CREATE DATABASE hbtn_test_db_5;
 USE hbtn_test_db_5;
-CREATE TABLE first_table (
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(128) NOT NULL,
-  c CHAR(1) NOT NULL,
-  created_at DATE NOT NULL,
-  PRIMARY KEY (id)
-);
+CREATE TABLE `t` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `s` char(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
