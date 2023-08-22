@@ -1,13 +1,49 @@
--- Create database and table
-DROP DATABASE IF EXISTS hbtn_test_db_5;
-CREATE DATABASE IF NOT EXISTS hbtn_test_db_5;
-USE hbtn_test_db_5;
+-- 5-full_table.sql
 
--- Create first_table
-CREATE TABLE IF NOT EXISTS first_table (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(128) DEFAULT NULL,
-    c CHAR(1) DEFAULT NULL,
-    created_at DATE DEFAULT NULL,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- This script prints the full description of the first_table
+-- in the hbtn_0c_0 database.
+
+-- Connect to the hbtn_0c_0 database
+USE hbtn_0c_0;
+
+-- Use SHOW COLUMNS statement to get the table structure
+SELECT
+    'Table   Create Table' AS 'Table   Create Table'
+UNION ALL
+SELECT
+    TABLE_NAME AS 'Table',
+    CONCAT('CREATE TABLE `', TABLE_NAME, '` (') AS 'Create Table'
+FROM
+    INFORMATION_SCHEMA.TABLES
+WHERE
+    TABLE_SCHEMA = 'hbtn_0c_0'
+    AND TABLE_NAME = 'first_table'
+UNION ALL
+SELECT
+    CONCAT('`', COLUMN_NAME, '`', ' ', COLUMN_TYPE, ' ',
+           CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE 'DEFAULT NULL' END, ' ',
+           CASE WHEN COLUMN_DEFAULT IS NOT NULL THEN CONCAT('DEFAULT ', COLUMN_DEFAULT) ELSE '' END, ',') AS 'Create Table'
+FROM
+    INFORMATION_SCHEMA.COLUMNS
+WHERE
+    TABLE_SCHEMA = 'hbtn_0c_0'
+    AND TABLE_NAME = 'first_table'
+ORDER BY
+    TABLE_NAME, ORDINAL_POSITION
+UNION ALL
+SELECT
+    CONCAT('PRIMARY KEY (', GROUP_CONCAT('`', COLUMN_NAME, '`'), ')', ',') AS 'Create Table'
+FROM
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+    TABLE_SCHEMA = 'hbtn_0c_0'
+    AND TABLE_NAME = 'first_table'
+    AND CONSTRAINT_NAME = 'PRIMARY'
+UNION ALL
+SELECT
+    CONCAT(') ENGINE=', ENGINE, ' DEFAULT CHARSET=', CHARACTER_SET_NAME) AS 'Create Table'
+FROM
+    INFORMATION_SCHEMA.TABLES
+WHERE
+    TABLE_SCHEMA = 'hbtn_0c_0'
+    AND TABLE_NAME = 'first_table';
