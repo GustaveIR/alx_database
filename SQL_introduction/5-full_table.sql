@@ -1,24 +1,21 @@
--- 5-full_table.sql
+-- Full description
+-- Write a script that prints the full description of the table first_table from the database hbtn_0c_0 in your MySQL server.
+-- The database name will be passed as an argument of the mysql command
+-- You are not allowed to use the DESCRIBE or EXPLAIN statements
 
--- This script prints the full description of the first_table
--- in the hbtn_test_db_5 database.
-
--- Use SHOW COLUMNS statement to get the table structure
-SELECT
-    CONCAT(
-        'first_tableCREATETABLE`first_table`(',
-        GROUP_CONCAT(
-            '`', COLUMN_NAME, '`', COLUMN_TYPE,
-            CASE WHEN IS_NULLABLE = 'NO' THEN 'NOTNULL' ELSE '' END,
-            CASE WHEN COLUMN_DEFAULT IS NOT NULL THEN CONCAT('DEFAULT', COLUMN_DEFAULT) ELSE '' END,
-            ','
-            ORDER BY ORDINAL_POSITION
-        ),
-        'PRIMARYKEY(`id`)',
-        ')ENGINE=InnoDBDEFAULTCHARSET=utf8mb4COLLATE=utf8mb4_0900_ai_ci'
-    ) AS 'msg'
-FROM
-    INFORMATION_SCHEMA.COLUMNS
-WHERE
-    TABLE_SCHEMA = 'hbtn_test_db_5'
-    AND TABLE_NAME = 'first_table';
+-- Script to print the full description of the table first_table
+SELECT CONCAT(
+    TABLE_NAME, 'CREATE TABLE `', TABLE_NAME, '` (',
+    GROUP_CONCAT(
+        COLUMN_NAME,
+        ' ', COLUMN_TYPE,
+        IF(IS_NULLABLE = 'NO', ' NOT NULL', ''),
+        IF(COLUMN_DEFAULT IS NOT NULL, CONCAT(' DEFAULT ', QUOTE(COLUMN_DEFAULT)), ''),
+        IF(COLUMN_KEY = 'PRI', ' PRIMARY KEY', ''),
+        IF(EXTRA = 'auto_increment', ' AUTO_INCREMENT', '')
+        SEPARATOR ',\n'
+    ),
+    ') ENGINE=', ENGINE, ' DEFAULT CHARSET=', CHARACTER_SET_NAME, ' COLLATE=', COLLATION_NAME
+) AS Table_Description
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA = 'hbtn_0c_0' AND TABLE_NAME = 'first_table';
