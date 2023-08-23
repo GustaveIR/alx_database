@@ -1,5 +1,5 @@
 -- Full description
--- Write a script that prints the full description of the table first_table from the database hbtn_0c_0 in your MySQL server.
+-- Write a script that prints the full description of the table first_table from the database hbtn_0c_5 in your MySQL server.
 -- The database name will be passed as an argument of the mysql command
 -- You are not allowed to use the DESCRIBE or EXPLAIN statements
 
@@ -18,4 +18,4 @@ SELECT CONCAT(
     ') ENGINE=', ENGINE, ' DEFAULT CHARSET=', CHARACTER_SET_NAME, ' COLLATE=', COLLATION_NAME
 ) AS Table_Description
 FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = 'hbtn_0c_0' AND TABLE_NAME = 'first_table';
+WHERE TABLE_SCHEMA = 'hbtn_0c_5' AND TABLE_NAME = 'first_table';
