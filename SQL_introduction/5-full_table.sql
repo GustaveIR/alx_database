@@ -1,3 +1,4 @@
+-- Script to print the full description of the table first_table
 SELECT CONCAT(
     'CREATE TABLE `', TABLE_NAME, '` (',
     GROUP_CONCAT(
