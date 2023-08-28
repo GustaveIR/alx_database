@@ -1,9 +1,18 @@
--- Script to print the full description of the table first_table
 SELECT CONCAT(
-    'Table   Create Table\n',
-    TABLE_NAME, ' ',
-    CREATE_TABLE
+    'first_tableCREATE TABLE `first_table` (\n',
+    GROUP_CONCAT(
+        '`', COLUMN_NAME, '` ',
+        COLUMN_TYPE,
+        IF(IS_NULLABLE = 'NO', ' NOT NULL', ''),
+        IF(COLUMN_DEFAULT IS NOT NULL, CONCAT(' DEFAULT ', QUOTE(COLUMN_DEFAULT)), ''),
+        IF(COLUMN_KEY = 'PRI', ' PRIMARY KEY', ''),
+        IF(EXTRA = 'auto_increment', ' AUTO_INCREMENT', '')
+        SEPARATOR ',\n'
+    ),
+    '\n) ENGINE=', ENGINE_TYPE,
+    IF(CHARACTER_SET_NAME IS NOT NULL, CONCAT(' DEFAULT CHARSET=', CHARACTER_SET_NAME), ''),
+    IF(COLLATION_NAME IS NOT NULL, CONCAT(' COLLATE=', COLLATION_NAME), '')
 ) AS Table_Description
-FROM INFORMATION_SCHEMA.TABLES
-WHERE TABLE_SCHEMA = 'hbtn_0c_0' AND TABLE_NAME = 'first_table';
-
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'hbtn_0c_0' AND TABLE_NAME = 'first_table'
+GROUP BY TABLE_NAME, ENGINE_TYPE, CHARACTER_SET_NAME, COLLATION_NAME;
