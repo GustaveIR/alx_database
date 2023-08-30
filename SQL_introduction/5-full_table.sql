@@ -1,7 +1,9 @@
-CREATE TABLE `first_table` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `c` char(1) DEFAULT NULL,
-  `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- Script to print the full description of the table first_table
+USE hbtn_0c_0;
+
+SELECT GROUP_CONCAT(COLUMN_NAME, ' ', COLUMN_TYPE, ' ', IFNULL(COLUMN_DEFAULT, 'NULL')) AS column_info
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'hbtn_0c_0'
+  AND TABLE_NAME = 'first_table';
+
+
