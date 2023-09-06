@@ -1,9 +1,21 @@
---Create_table 'second_table' in database 'hbtn_0c_0'
---Add-props (id INT), (name VAR-CHAR(256)), (score INT)
-CREATE TABLE IF NOT EXISTS second_table (id INT, name VARCHAR(256), score INT);
+-- Create table second_table if it doesn't exist
+CREATE TABLE IF NOT EXISTS `second_table` (
+    `id` INT,
+    `name` VARCHAR(256),
+    `score` INT
+);
 
---Script should create maximum of 4 records 
-INSERT INTO `second_table` (`id`, `name`, `score`) VALUES (1, "John", 10);
-INSERT INTO `second_table` (`id`, `name`, `score`) VALUES (2, "Alex", 3);
-INSERT INTO `second_table` (`id`, `name`, `score`) VALUES (3, "Bob", 14);
-INSERT INTO `second_table` (`id`, `name`, `score`) VALUES (4, "George", 8);
+-- Check if the table already exists by counting the rows in it
+SET @table_exists = (SELECT COUNT(*) FROM `second_table`);
+
+-- If the table doesn't exist, insert the records
+IF @table_exists = 0 THEN
+    INSERT INTO `second_table` (`id`, `name`, `score`) VALUES
+        (1, 'John', 10),
+        (2, 'Alex', 3),
+        (3, 'Bob', 14),
+        (4, 'George', 8);
+END IF;
+
+-- Display the records from the table
+SELECT `id`, `name`, `score` FROM `second_table`;
