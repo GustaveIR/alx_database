@@ -1,8 +1,11 @@
+-- CREATE TABLE and INSERTs should be in uppercase
 -- create table force_name on MySQL server
 CREATE TABLE IF NOT EXISTS force_name (
     id INT,
-    name VARCHAR(256) NOT NULL
+    name VARCHAR(256) NOT NULL,
+    PRIMARY KEY (id)
 );
+
 -- Inserting data into force_name
 INSERT INTO force_name (id, name) VALUES (1, 'Holberton School');
 INSERT INTO force_name (id, name) VALUES (2, 'Python is cool');
