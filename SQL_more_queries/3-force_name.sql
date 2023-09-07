@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS force_name (
 );
 
 -- Inserting data into force_name
-INSERT INTO force_name (id, name) VALUES (1, 'Holberton School');
-INSERT INTO force_name (id, name) VALUES (2, 'Python is cool');
-INSERT INTO force_name (id, name) VALUES (3, 'Holberton');
-INSERT INTO force_name (id, name) VALUES (4, 'School');
-INSERT INTO force_name (id, name) VALUES (5, 'C is fun');
+INSERT INTO force_name (id, name) VALUES (1, 'Holberton School') ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO force_name (id, name) VALUES (2, 'Python is cool') ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO force_name (id, name) VALUES (3, 'Holberton') ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO force_name (id, name) VALUES (4, 'School') ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO force_name (id, name) VALUES (5, 'C is fun') ON DUPLICATE KEY UPDATE id=id;
