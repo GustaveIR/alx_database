@@ -1,4 +1,8 @@
--- Create of the MYSQL user user_0d_2
-CREATE USER IF NOT EXISTS 'user_0d_2'@'localhost' IDENTIFIED BY 'user_0d_2_password';
-GRANT ALL PRIVILEGES ON * . * TO 'user_0d_2'@'localhost'
+-- Create the MySQL server user user_0d_1
+CREATE USER IF NOT EXISTS 'user_0d_1'@'localhost' IDENTIFIED BY 'user_0d_1_pwd';
+
+-- Grant all privileges to user_0d_1
+GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost';
+
+-- Flush privileges to apply the changes
 FLUSH PRIVILEGES;
