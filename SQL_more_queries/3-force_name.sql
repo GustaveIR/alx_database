@@ -1,7 +1,7 @@
 -- CREATE TABLE and INSERTs should be in uppercase
 -- create table force_name on MySQL server
 CREATE TABLE IF NOT EXISTS force_name (
-    id INT PRIMARY KEY AUTO_INCREMENT,  -- Set id as the primary key and auto-incremented
+    id INT AUTO_INCREMENT,  -- Set id as the primary key and auto-incremented
     name VARCHAR(256) NOT NULL
 );
 
