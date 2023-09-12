@@ -1,5 +1,8 @@
--- Create table force_name on MySQL server if it doesn't exist
-CREATE TABLE IF NOT EXISTS force_name (
+-- Drop the table if it exists
+DROP TABLE IF EXISTS force_name;
+
+-- Create table force_name on MySQL server
+CREATE TABLE force_name (
     id INT PRIMARY KEY,
     name VARCHAR(256) NOT NULL
 );
