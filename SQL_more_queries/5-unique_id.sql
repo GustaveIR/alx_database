@@ -3,5 +3,5 @@
 
 CREATE TABLE IF NOT EXISTS UNIQUE_ID (
     id INT DEFAULT 1, UNIQUE(ID),
-    name VARCHAR(256)
-);
+    name VARCHAR(256) );
+
